@@ -1,12 +1,11 @@
 provider "aws" {
-  region = "us-east-1"
+  region = "ca-central-1"
 }
 
 resource "aws_instance" "demo-server" {
-    ami = "ami-053b0d53c279acc90"
+    ami = "ami-06873c81b882339ac"
     instance_type = "t2.micro"
-    key_name = "dpp"
-    //security_groups = [ "demo-sg" ]
+    key_name = "DevOps"
     vpc_security_group_ids = [aws_security_group.demo-sg.id]
     subnet_id = aws_subnet.dpp-public-subnet-01.id 
     for_each = toset(["jenkins-master", "build-slave", "ansible"])
@@ -62,7 +61,7 @@ resource "aws_subnet" "dpp-public-subnet-01" {
   vpc_id = aws_vpc.dpp-vpc.id
   cidr_block = "10.1.1.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone = "us-east-1a"
+  availability_zone = "ca-central-1a"
   tags = {
     Name = "dpp-public-subent-01"
   }
@@ -72,7 +71,7 @@ resource "aws_subnet" "dpp-public-subnet-02" {
   vpc_id = aws_vpc.dpp-vpc.id
   cidr_block = "10.1.2.0/24"
   map_public_ip_on_launch = "true"
-  availability_zone = "us-east-1b"
+  availability_zone = "ca-central-1b"
   tags = {
     Name = "dpp-public-subent-02"
   }
@@ -110,7 +109,7 @@ module "sgs" {
 
 module "eks" {
     source = "../eks"
-      vpc_id     =     aws_vpc.dpp-vpc.id
-      subnet_ids = [aws_subnet.dpp-public-subnet-01.id,aws_subnet.dpp-public-subnet-02.id]
+    vpc_id     =     aws_vpc.dpp-vpc.id
+    subnet_ids = [aws_subnet.dpp-public-subnet-01.id,aws_subnet.dpp-public-subnet-02.id]
     sg_ids = module.sgs.security_group_public
 }
