@@ -8,6 +8,7 @@
    Manage Jenkins --> manage credentials --> system --> Global credentials --> add credentials
  - Credentials type: `Secret text`
  - ID: `sonarqube-key`
+ - Secret: token generated from step 2
 
 4. Install SonarQube plugin
     Manage Jenkins --> Available plugins 
@@ -23,5 +24,9 @@
 6. Configure sonarqube scanner 
    Manage Jenkins --> Global Tool configuration --> Sonarqube scanner 
    Add sonarqube scanner 
-   - Sonarqube scanner: `sonar-scanner`
+   - Sonarqube scanner: `sonarqube-scanner`
 
+7. Add Unit Tests Stage in Jenkins
+
+8. Observe Quality Gate (threshold for SonarQube to determine pass or fail)
+   Go to SonarQube ---> Projects ---> <organization> ---> Quality Gate

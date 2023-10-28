@@ -9,7 +9,7 @@
    kind: `ssh username with private key`  
    Scope: `Global`     
    ID: `maven_slave`    
-   Username: `ec2-user`  
+   Username: `ubuntu`  
    private key: `dpo.pem key content`  
 
 ### Add node 

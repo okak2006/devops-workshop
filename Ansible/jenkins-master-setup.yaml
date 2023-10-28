@@ -1,6 +1,8 @@
 ---
+# hosts as defined in the hosts file. Note: hosts file created in /opt. pem file was also placed there so that ansible can make connections to other servers that use the same key.
 - hosts: jenkins-master
-  become: true 
+  # become: true = run as root user
+  become: true
   tasks: 
   - name: add jenkins key 
     apt_key: 
